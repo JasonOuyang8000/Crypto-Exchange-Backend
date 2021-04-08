@@ -7,5 +7,4 @@ The goal is to allow users create an account and reload fake money to buy crypto
 ## Wireframes
 
 https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=sharing
-
-(https://github.com/JasonOuyang8000/Crypto-Exchange-Backend/wireframes)
+<img src="https://github.com/JasonOuyang8000/Crypto-Exchange-Backend/blob/master/wireframes/Homepage.JPG">
