@@ -1,4 +1,4 @@
-# Title:CryptoXChange
+# CryptoXChange
 
 ## Summary
 
