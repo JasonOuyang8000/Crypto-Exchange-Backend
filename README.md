@@ -2,7 +2,7 @@
 
 ## Summary
 
-The goal is to allow users create an account and reload fake money to buy crypto currency or to sell crypto currency back for fake money. The fake money should be in terms of USD. The purpose is to give the user a simulation of trading crpto currency using USD.
+The goal is to allow users create an account and reload fake money to buy crypto currency or to sell crypto currency back for fake money. The fake money should be in terms of USD. The purpose is to give the user a simulation of trading crypto currency using USD.
 
 ## Wireframes
 https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=sharing
@@ -57,3 +57,28 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 |   GET   |  /user/cryptos|   get all user cryptos|
 |   PUT  |  /user/cryptos |  user buy/sell crypto|
 
+<<<<<<< HEAD
+=======
+### Front End
+| Http | Route | Description |
+|------|-------|-------------|
+|   GET   |  /all-cryptos     | all cryptos page        |
+|   GET  |   /search |   search a crypto/ homepage      |
+|   GET  |   /trade  |   trade crypto page    |
+|   GET  |   /dashboard  |   dashboard page|
+
+
+## MVP Checklist
+* All Front End pages to work.
+* login/signup modal (with verify, login, and create route)
+* Get all cryptos from user.
+* Have authentication built in for each route.
+* Have a portfolio value be calculated when running GET users/cryptos.
+* Have a buy/sell option for each crypto.
+* Have dashboard page to show all owned cryptos, welcome message,balance ,and estimated portfolio value.
+* Have trade page to show all owned cryptos, balance, estimated profolio value, and buy/sell forms.
+* Have all cryptos page to show all cryptos.
+
+## Stretch Goals
+
+>>>>>>> 8f4fb3b0832d0ee2ca825c4007ea85dc3f876bbf
