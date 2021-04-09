@@ -1,0 +1,30 @@
+{
+  "name": "crypto-exchange-backend",
+  "version": "1.0.0",
+  "description": "The goal is to allow users create an account and reload fake money to buy crypto currency or to sell crypto currency back for fake money. The fake money should be in terms of USD. The purpose is to give the user a simulation of trading crypto currency using USD.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasonOuyang8000/Crypto-Exchange-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JasonOuyang8000/Crypto-Exchange-Backend/issues"
+  },
+  "homepage": "https://github.com/JasonOuyang8000/Crypto-Exchange-Backend#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.5.1",
+    "rowdy-logger": "^1.0.2",
+    "sequelize": "^6.6.2"
+  }
+}

@@ -1,4 +1,4 @@
-# CryptoXChange
+# CryptoPlay
 
 ## Summary
 
@@ -59,7 +59,6 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 
 
 ## MVP Checklist
-* All Front End pages to work.
 * login/signup modal (with verify, login, and create route)
 * Get all cryptos from user.
 * Have authentication built in for each route.
