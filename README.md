@@ -69,4 +69,3 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 * Have all cryptos page to show all cryptos.
 
 ## Stretch Goals
-
