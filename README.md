@@ -7,7 +7,7 @@ The goal is to allow users create an account and reload fake money to buy crypto
 ## Wireframes
 https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=sharing
 
-### Homepage
+### Homepage/Search Page
 <img src="https://github.com/JasonOuyang8000/Crypto-Exchange-Backend/blob/master/wireframes/Homepage.JPG">
 
 ### Dashboard Page
@@ -44,3 +44,23 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 
 <img src="https://github.com/JasonOuyang8000/Crypto-Exchange-Backend/blob/master/erd/erd_one.JPG">
 
+## Routes Inventory
+### BackEnd
+| Http | Route | Description |
+|------|-------|-------------|
+|   GET   |  /cryptos     |  get all cryptos |
+|   GET  |   /cryptos/:id  |   get one crypto |
+|   POST   |  /user |  create account|
+|   GET  |  /user/verify |  authenticate user|
+|   POST   |  /user/login|   login to account|
+|   GET  |  /user |  get all user info|
+|   GET   |  /user/cryptos|   get all user cryptos|
+|   POST   |  /user/cryptos |  user buy/sell crypto|
+
+### Front End
+| Http | Route | Description |
+|------|-------|-------------|
+|   GET   |  /all-cryptos     | all cryptos page        |
+|   GET  |   /search |   search a crypto/ homepage      |
+|   GET  |   /trade  |   trade crypto page    |
+|   GET  |   /dashboard  |   dashboard page|
