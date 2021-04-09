@@ -60,7 +60,7 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 ### Front End
 | Http | Route | Description |
 |------|-------|-------------|
-|   GET   |  /all-cryptos     | all cryptos page        |
+|   GET   |  /all-cryptos     | all cryptos page      |
 |   GET  |   /search |   search a crypto/ homepage      |
 |   GET  |   /trade  |   trade crypto page    |
 |   GET  |   /dashboard  |   dashboard page|
