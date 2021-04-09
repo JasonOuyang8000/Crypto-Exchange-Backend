@@ -64,3 +64,13 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 |   GET  |   /search |   search a crypto/ homepage      |
 |   GET  |   /trade  |   trade crypto page    |
 |   GET  |   /dashboard  |   dashboard page|
+
+
+## MVP Checklist
+* All Front End pages to work.
+* login/signup modal (with verify, login, and create route)
+* Get all cryptos from user.
+* Have authentication built in for each route.
+* Have a portfolio value be calculated when running GET users/cryptos.
+* Have a buy/sell option for each crypto.
+
