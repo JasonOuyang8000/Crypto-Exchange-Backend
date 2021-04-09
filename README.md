@@ -73,4 +73,9 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 * Have authentication built in for each route.
 * Have a portfolio value be calculated when running GET users/cryptos.
 * Have a buy/sell option for each crypto.
+* Have dashboard page to show all owned cryptos, welcome message,balance ,and estimated portfolio value.
+* Have trade page to show all owned cryptos, balance, estimated profolio value, and buy/sell forms.
+* Have all cryptos page to show all cryptos.
+
+## Stretch Goals
 
