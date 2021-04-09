@@ -39,3 +39,8 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 9. When user goes to sell form, user should be able to find the crpyto through dropdown they own and enter a amount they wish to sell. 
 10. Every successful buy should update the current balance and the cryptos they owned in the trade page.
 11. Signout button successfully bring the user back to the homepage where the user can search a crypto again. 
+
+## ERD
+
+<img src="https://github.com/JasonOuyang8000/Crypto-Exchange-Backend/blob/master/erd/erd_one.JPG">
+
