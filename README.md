@@ -57,16 +57,6 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 |   GET   |  /user/cryptos|   get all user cryptos|
 |   PUT  |  /user/cryptos |  user buy/sell crypto|
 
-<<<<<<< HEAD
-=======
-### Front End
-| Http | Route | Description |
-|------|-------|-------------|
-|   GET   |  /all-cryptos     | all cryptos page        |
-|   GET  |   /search |   search a crypto/ homepage      |
-|   GET  |   /trade  |   trade crypto page    |
-|   GET  |   /dashboard  |   dashboard page|
-
 
 ## MVP Checklist
 * All Front End pages to work.
@@ -81,4 +71,3 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 
 ## Stretch Goals
 
->>>>>>> 8f4fb3b0832d0ee2ca825c4007ea85dc3f876bbf
