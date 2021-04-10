@@ -1,6 +1,7 @@
 const express = require('express');
 const rowdy = require('rowdy-logger');
 const userRouter = require('./routers/userRouter');
+const cryptoRouter = require('./routers/cryptoRouter');
 require('dotenv').config();
 
 
@@ -15,7 +16,8 @@ app.use(express.json());
 app.use(require('cors')());
 
 
-app.use('/user', userRouter);
+app.use('/users', userRouter);
+app.use('/cryptos', cryptoRouter);
 
 app.listen(port, () => {
     console.log('starting server');
