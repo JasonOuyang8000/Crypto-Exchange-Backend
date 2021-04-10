@@ -21,7 +21,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-     await queryInterface.changeColumn('crypto','crypto_id',{
+     await queryInterface.changeColumn('cryptos','crypto_id',{
       type: Sequelize.INTEGER
     });
   }
