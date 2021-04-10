@@ -1,6 +1,9 @@
 
-const { user } = require('../models');
+const { user, crypto, userCrypto } = require('../models');
 const bcrypt = require('bcryptjs');
+const axios = require('axios');
+require('dotenv').config();
+
 // Check All ull
 (async ()=> {
     try {
@@ -56,111 +59,57 @@ const bcrypt = require('bcryptjs');
 
 })();
 
-//  Checks password length
-(async ()=> {
+
+//  Add cryptos
+// (async() => {
+//     try {
+//         const response = await axios.get('https://api.coinranking.com/v2/coins', {
+//             headers: {
+//                 "x-access-token": process.env.COINRANKING_API
+//             }
+//         });
+//        const {data} = response.data;
+       
+//        data.coins.forEach(c => {
+//             const { uuid: crypto_id, iconUrl: image, symbol, name} = c;
+//             crypto.create({
+//                 crypto_id,
+//                 image,
+//                 symbol,
+//                 name
+//             });
+//         });
+//     }
+//     catch(error) {
+//         console.log(error);
+//     }
+// })();
+
+(async() => {
     try {
-        console.log( bcrypt.hashSync('12345', 5).length)
-        const createUser = await user.create({
-            name: 'test',
-            email: 'test@mail.com',
-            password: '1234',
-            balance: 5000,
-        });
-        console.log(createUser);
-   
-      
-    }   
-    catch(error){
-     
-        console.log("Less than 5 throws error",error.errors[0]['validatorKey'] === 'len');
+        const btc = await crypto.findOne({ 
+            where: {
+            crypto_id: 'Qwsogvtv82FCd'
+        }});
 
-    }
-
-})();
-
-(async ()=> {
-    try {
-
-        const createUser = await user.create({
-            name: 'test',
-            email: 'test@mail.com',
-            password: '1234132131231231231221312asdsadasdsadsadsadsas',
-            balance: 5000,
-        });
-
-   
-      
-    }   
-    catch(error){
-
-        console.log("Greater than 20 throws error",error.errors[0]['validatorKey'] === 'len' );
-
-    }
-
-})();
-
-//  Checks email 
-(async ()=> {
-    try {
-
-        const createUser = await user.create({
-            name: 'tew',
-            email: 'ted=',
-            password: '123413213',
-            balance: 5000,
+        // Get all association through eager loading.
+        const userOne = await user.findOne({
+            include: {
+                all: true
+            },
+            where: {
+                id: 14
+            }
         });
 
-   
-      
-    }   
-    catch(error){
-    
-        console.log("Throws error if not valid email",error.errors[0]['validatorKey'] === 'isEmail' );
-
+        await userOne.addCrypto(btc);
+        // const userCryptos = await userOne.getCryptos();
+        const userCryptos = await userOne.getUserCryptos();
+        // const newCrypto = await userOne.setUserCryptos();
+        console.log(userOne);
+        
     }
-
-})();
-
-//  Checks  balance
-(async ()=> {
-    try {
-
-        const createUser = await user.create({
-            name: 'ted',
-            email: 'ted@gmail.com',
-            password: '123413213',
-            balance: 4000,
-        });
-
-   
-      
-    }   
-    catch(error){
-    
-        console.log("Throws error if didn't reach min",error.errors[0]['validatorKey']  === 'min');
-
+    catch(error) {
+        console.log(error);
     }
-
 })();
-
-(async ()=> {
-    try {
-
-        const createUser = await user.create({
-            name: 'ted',
-            email: 'ted@gmail.com',
-            password: '123413213',
-            balance: 400000,
-        });
-
-   
-      
-    }   
-    catch(error){
-    
-        console.log("Throws error if passed max",error.errors[0]['validatorKey']  === 'max');
-
-    }
-
-})();
-

@@ -1,6 +1,8 @@
 const express = require('express');
 const rowdy = require('rowdy-logger');
 const userRouter = require('./routers/userRouter');
+require('dotenv').config();
+
 
 const app = express();
 
