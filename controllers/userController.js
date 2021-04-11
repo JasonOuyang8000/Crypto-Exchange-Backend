@@ -69,6 +69,38 @@ userController.login = async (req, res, next) => {
     }
 };
 
+userController.verifyUser = async (req, res, next) => {
+    try {
+        const { usertoken } = req.headers;
+        const { id } = jwt.verify(usertoken, process.env.SECRET);
+        
+        const userFind = await user.findOne({
+            where: {
+                id
+            }
+        });
+
+        if (userFind !== null) {
+            res.json({
+                message: 'ok'
+            });
+        }
+        else {
+            res.status(401).json({
+                error: 'User does not exist anymore!'
+            });
+        }
+    }
+    catch(error) {
+       res.status(401).json({
+           error: 'Your Token has been tampered!'
+       });
+    }
+
+
+
+}
+
 
 
 module.exports = userController;

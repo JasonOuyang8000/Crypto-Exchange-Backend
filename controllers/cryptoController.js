@@ -13,7 +13,7 @@ cryptoController.getCryptos = async (req, res, next) => {
         res.json({
             message: 'ok',
             cryptos: response.data
-        })
+        });
 
     }
     catch(error) {
@@ -32,7 +32,7 @@ cryptoController.getOneCrypto = async (req, res, next) => {
                 "x-access-token": process.env.COINRANKING_API
             }
         });
-
+    
         res.json({
             message: 'ok',
             crypto: response.data
