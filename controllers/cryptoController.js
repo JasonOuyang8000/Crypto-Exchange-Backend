@@ -22,10 +22,12 @@ cryptoController.getCryptos = async (req, res, next) => {
             });
     
         }
+
+     
      
         res.json({
             message: 'ok',
-            cryptos: response.data
+            cryptos: response.data.data.coins
         });
 
     }
