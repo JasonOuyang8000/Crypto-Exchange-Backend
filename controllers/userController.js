@@ -30,6 +30,7 @@ userController.createUser = async (req, res, next) => {
     }
 
     catch(error) {
+        console.log(error);
         const errorMessage = error.errors ? error.errors[0].message : error.message;
         res.status(400).json({
             error: errorMessage
