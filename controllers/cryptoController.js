@@ -1,15 +1,28 @@
 const axios = require('axios');
+const e = require('express');
 
 const cryptoController = {};
 
 cryptoController.getCryptos = async (req, res, next) => {
     try {
-        const response = await axios.get('https://api.coinranking.com/v2/coins', {
-            headers: {
-                "x-access-token": process.env.COINRANKING_API
-            }
-        });
+        let response = null;
 
+        if (req.query.hasOwnProperty('q')) {
+            response = await axios.get(`https://api.coinranking.com/v2/search-suggestions?query=${req.query.q}`, {
+                headers: {
+                    "x-access-token": process.env.COINRANKING_API
+                }
+            });
+        }
+        else {
+            response = await axios.get('https://api.coinranking.com/v2/coins', {
+                headers: {
+                    "x-access-token": process.env.COINRANKING_API
+                }
+            });
+    
+        }
+     
         res.json({
             message: 'ok',
             cryptos: response.data
@@ -23,7 +36,7 @@ cryptoController.getCryptos = async (req, res, next) => {
     }
 };
 
-cryptoController.getOneCrypto = async (req, res, next) => {
+cryptoController.getOneCryptoById = async (req, res, next) => {
     try {
         
 
@@ -34,8 +47,7 @@ cryptoController.getOneCrypto = async (req, res, next) => {
         });
     
         res.json({
-            message: 'ok',
-            crypto: response.data
+            message: 'ok'
         });
 
     }

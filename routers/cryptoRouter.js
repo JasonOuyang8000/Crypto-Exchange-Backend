@@ -1,10 +1,11 @@
 const express = require('express');
 
-const { getCryptos, getOneCrypto } = require('./../controllers/cryptoController');
+const { getCryptos, getOneCryptoById, get } = require('./../controllers/cryptoController');
 
 const cryptoRouter = express.Router();
 
 cryptoRouter.get('/', getCryptos);
-cryptoRouter.get('/:id', getOneCrypto);
+cryptoRouter.get('/:id', getOneCryptoById);
+
 
 module.exports = cryptoRouter;
