@@ -44,8 +44,6 @@ module.exports = (sequelize, DataTypes) => {
     allowNull: false,
     validate: {
       notEmpty: true,
-      min: 5000,
-      max: 100000,
     }
   }
   }, {

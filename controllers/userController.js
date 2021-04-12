@@ -1,6 +1,7 @@
-const { user } = require('./../models');
+const { user, crypto } = require('./../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const e = require('express');
 
 const userController = {};
 
@@ -30,7 +31,6 @@ userController.createUser = async (req, res, next) => {
     }
 
     catch(error) {
-        console.log(error);
         const errorMessage = error.errors ? error.errors[0].message : error.message;
         res.status(400).json({
             error: errorMessage
@@ -94,13 +94,71 @@ userController.verifyUser = async (req, res, next) => {
     }
     catch(error) {
        res.status(401).json({
-           error: 'Your Token has been tampered!'
+           error: 'Your  User Token has been tampered!'
        });
     }
-
-
-
 }
+
+userController.userTransaction = async (req, res, next) => {
+    try {
+        const { usertoken } = req.headers;
+        const { id } = jwt.verify(usertoken, process.env.SECRET);
+        const { cryptoId, dollarAmount, coinAmount, type } = req.body;
+
+        const userFind = await user.findOne({
+            where: id
+        });
+
+        const cryptoFind = await crypto.findOne({
+            where: {
+                crypto_id: cryptoId
+            }
+        });
+
+        // console.log(cryptoFind, userFind);
+        
+        if ( type === 'buy') {
+            if (userFind.balance < dollarAmount) res.status(401).json({ error: 'Not Enough Money'});
+
+            await userFind.addCrypto(cryptoFind);
+            
+            const [userCrypto] = await userFind.getUserCryptos({
+                where: {
+                    userId: userFind.id,
+                    cryptoId: cryptoFind.id
+                }
+            });
+
+           userFind.balance -= dollarAmount;
+           userFind.save();
+           
+           if (userCrypto.amount) {
+              userCrypto.increment('amount', {by: coinAmount});
+           }
+           else {
+              userCrypto.amount = coinAmount;
+              userCrypto.save();
+           }
+
+            res.json({
+                message: 'ok'
+            });
+
+        }
+
+        else {
+            
+        }
+
+    }
+    catch(error) {
+        res.status(400).json({
+            error: 'Something Wrong Happpened'
+        })
+    }
+};
+
+
 
 
 

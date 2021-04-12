@@ -105,8 +105,9 @@ require('dotenv').config();
         await userOne.addCrypto(btc);
         // const userCryptos = await userOne.getCryptos();
         const userCryptos = await userOne.getUserCryptos();
+
+        console.log(userCryptos.amount);
         // const newCrypto = await userOne.setUserCryptos();
-        console.log(userOne);
         
     }
     catch(error) {
