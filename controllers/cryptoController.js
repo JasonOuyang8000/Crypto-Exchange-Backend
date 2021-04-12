@@ -6,7 +6,7 @@ const cryptoController = {};
 cryptoController.getCryptos = async (req, res, next) => {
     try {
         let response = null;
-
+        
         if (req.query.hasOwnProperty('q')) {
             response = await axios.get(`https://api.coinranking.com/v2/search-suggestions?query=${req.query.q}`, {
                 headers: {
