@@ -1,5 +1,5 @@
 
-const { user, crypto, userCrypto } = require('../models');
+const { user, crypto, userCrypto } = require('./../models');
 const bcrypt = require('bcryptjs');
 const axios = require('axios');
 require('dotenv').config();
@@ -94,9 +94,7 @@ require('dotenv').config();
 
         // Get all association through eager loading.
         const userOne = await user.findOne({
-            include: {
-                all: true
-            },
+            include: 'crypto',
             where: {
                 id: 14
             }
@@ -105,7 +103,7 @@ require('dotenv').config();
         await userOne.addCrypto(btc);
         // const userCryptos = await userOne.getCryptos();
         const userCryptos = await userOne.getUserCryptos();
-
+        
         console.log(userCryptos.amount);
         // const newCrypto = await userOne.setUserCryptos();
         

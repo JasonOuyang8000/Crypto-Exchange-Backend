@@ -47,9 +47,13 @@ cryptoController.getOneCryptoById = async (req, res, next) => {
                 "x-access-token": process.env.COINRANKING_API
             }
         });
-    
+
+
+        const { coin } = response.data.data;
+        console.log(coin);
         res.json({
-            message: 'ok'
+            message: 'ok',
+            coin
         });
 
     }

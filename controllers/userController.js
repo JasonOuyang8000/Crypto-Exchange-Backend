@@ -2,6 +2,7 @@ const { user, crypto } = require('./../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const e = require('express');
+const axios = require('axios');
 
 const userController = {};
 
@@ -115,51 +116,95 @@ userController.userTransaction = async (req, res, next) => {
             }
         });
 
+        const [userCrypto] = await userFind.getUserCryptos({
+            where: {
+                userId: userFind.id,
+                cryptoId: cryptoFind.id
+            }
+        });
+       
         // console.log(cryptoFind, userFind);
         
         if ( type === 'buy') {
-            if (userFind.balance < dollarAmount) res.status(401).json({ error: 'Not Enough Money'});
+            if (userFind.balance < dollarAmount)  return res.status(401).json({ error: 'Not Enough Money'});
 
             await userFind.addCrypto(cryptoFind);
             
-            const [userCrypto] = await userFind.getUserCryptos({
-                where: {
-                    userId: userFind.id,
-                    cryptoId: cryptoFind.id
-                }
-            });
 
-           userFind.balance -= dollarAmount;
-           userFind.save();
-           
+           userFind.decrement('balance', {by: dollarAmount});
+           await userFind.save();
+
            if (userCrypto.amount) {
-              userCrypto.increment('amount', {by: coinAmount});
+              await userCrypto.increment('amount', {by: coinAmount});
            }
            else {
               userCrypto.amount = coinAmount;
-              userCrypto.save();
+              await userCrypto.save();
            }
 
             res.json({
-                message: 'ok'
+                message: 'ok',
+                balance: userFind.balance,
+                coinAmount: userCrypto.amount
             });
 
         }
 
-        else {
-            
+        else if (type === 'sell') {
+            if (userCrypto.amount < coinAmount) return  res.status(401).json({ error: `You can't sell more than what you have. You have ${userCrypto.amount} ${cryptoFind.symbol}.`});
+
+            await userCrypto.decrement('amount', {by: coinAmount});
+
+            await userFind.increment('balance', {by: dollarAmount})
+
+            res.json({
+                message: 'ok',
+                username: userFind.username,
+                balance: userFind.balance,
+                coinAmount: userCrypto.amount
+            });
         }
 
     }
     catch(error) {
+        console.log(error);
         res.status(400).json({
-            error: 'Something Wrong Happpened'
+            error: 'Something Error Happpened'
         })
     }
 };
 
+userController.getCryptosFromUser = async (req,res,next) => {
+    try {
+        const { usertoken } = req.headers;
+        const { id } = jwt.verify(usertoken, process.env.SECRET);
+        const userFind = await user.findOne({
+            where: {
+                id
+            }
+        });
+
+        console.log(id);
+
+        const userCryptos = await userFind.getCryptos();
+
+        res.json({
+            message: 'ok',
+            balance: userFind.balance,
+            userCryptos
+        });
+    
+    }
+    catch(error) {
+        console.log(error);
+        res.status(400).json({
+            error: 'No Access'
+        })
+    }
 
 
+};
+ 
 
 
 module.exports = userController;
