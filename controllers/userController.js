@@ -152,10 +152,6 @@ userController.userTransaction = async (req, res, next) => {
 
         }
 
-        else if ( type ==='buy-all' ) {
-
-        }
-
         else if (type === 'sell') {
             const {dollarAmount, coinAmount } =req.body; 
 
