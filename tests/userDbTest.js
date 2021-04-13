@@ -4,60 +4,60 @@ const bcrypt = require('bcryptjs');
 const axios = require('axios');
 require('dotenv').config();
 
-// Check All ull
-(async ()=> {
-    try {
-        const createUser = await user.create();
-        console.log(createUser);
-    }   
-    catch(error) {
-        console.log('All null validation', error.errors.filter(e => {
-            return e['validatorKey'] === 'is_null';
-        }).length === 4);
+// // Check All ull
+// (async ()=> {
+//     try {
+//         const createUser = await user.create();
+//         console.log(createUser);
+//     }   
+//     catch(error) {
+//         console.log('All null validation', error.errors.filter(e => {
+//             return e['validatorKey'] === 'is_null';
+//         }).length === 4);
 
-    }
+//     }
 
-})();
-
-// Check All Empty
-(async ()=> {
-    try {
-
-        const createUser = await user.create({
-            name: '',
-            email: '',
-            password: '',
-            balance: '',
-        });
-      
-    }   
-    catch(error) {
-        console.log('All Empty Validation', error.errors.filter(e => {
-            return e['validatorKey'] === 'notEmpty';
-        }).length === 4);
-    }
-
-})();
+// })();
 
 // Check All Empty
-(async ()=> {
-    try {
+// (async ()=> {
+//     try {
 
-        const createUser = await user.create({
-            name: '',
-            email: '',
-            password: '',
-            balance: '',
-        });
+//         const createUser = await user.create({
+//             name: '',
+//             email: '',
+//             password: '',
+//             balance: '',
+//         });
       
-    }   
-    catch(error) {
-        console.log('All Empty Validation', error.errors.filter(e => {
-            return e['validatorKey'] === 'notEmpty';
-        }).length === 4);
-    }
+//     }   
+//     catch(error) {
+//         console.log('All Empty Validation', error.errors.filter(e => {
+//             return e['validatorKey'] === 'notEmpty';
+//         }).length === 4);
+//     }
 
-})();
+// })();
+
+// Check All Empty
+// (async ()=> {
+//     try {
+
+//         const createUser = await user.create({
+//             name: '',
+//             email: '',
+//             password: '',
+//             balance: '',
+//         });
+      
+//     }   
+//     catch(error) {
+//         console.log('All Empty Validation', error.errors.filter(e => {
+//             return e['validatorKey'] === 'notEmpty';
+//         }).length === 4);
+//     }
+
+// })();
 
 
 //  Add cryptos
@@ -87,24 +87,16 @@ require('dotenv').config();
 
 (async() => {
     try {
-        const btc = await crypto.findOne({ 
-            where: {
-            crypto_id: 'Qwsogvtv82FCd'
-        }});
-
-        // Get all association through eager loading.
-        const userOne = await user.findOne({
-            include: 'crypto',
-            where: {
-                id: 14
-            }
+        
+        const createdUser = await user.create({
+            username: '21312122212312',
+            email : 'agagagag2112112@gmail.com',
+            password: '212312',
+            balance: 400,
+            "startBalance": 600
         });
 
-        await userOne.addCrypto(btc);
-        // const userCryptos = await userOne.getCryptos();
-        const userCryptos = await userOne.getUserCryptos();
-        
-        console.log(userCryptos.amount);
+        console.log(createdUser);
         // const newCrypto = await userOne.setUserCryptos();
         
     }

@@ -23,6 +23,9 @@ module.exports = {
       balance: {
         type: Sequelize.DECIMAL
       },
+      startBalance: {
+        type: Sequelize.DECIMAL
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

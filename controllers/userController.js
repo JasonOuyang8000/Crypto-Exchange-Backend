@@ -8,20 +8,25 @@ const userController = {};
 
 userController.createUser = async (req, res, next) => {
     try {
-        const { username, email, password, balance } = req.body;
+        const { username, email, password, balance, startBalance } = req.body;
         
+        console.log(startBalance);
+
         if (password.length < 5 ) {
             throw new Error('Password needs to be at least 5 characters long');
         }
         
+
         const hashedPassword = bcrypt.hashSync(password, 10);
 
         const createdUser = await user.create({
             username,
             email,
             password: hashedPassword,
-            balance
+            balance,
+            startBalance: startBalance
         });
+        
 
         const userToken = jwt.sign({ id: createdUser.id }, process.env.SECRET);
 
@@ -206,20 +211,20 @@ userController.getCryptosFromUser = async (req,res,next) => {
                 id
             }
         });
-
-       
-
+    
         const userCryptos = await userFind.getCryptos();
-
+       
         res.json({
             message: 'ok',
             balance: userFind.balance,
+            startBalance: userFind.startBalance,
             username: userFind.username,
             userCryptos
         });
     
     }
     catch(error) {
+        console.log(error);
         res.status(400).json({
             error: 'No Access'
         })

@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   crypto.init({
     crypto_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    description: DataTypes.TEXT,
     image: DataTypes.STRING,
     symbol: DataTypes.STRING,
   }, {

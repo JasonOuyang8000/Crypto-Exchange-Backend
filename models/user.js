@@ -45,8 +45,17 @@ module.exports = (sequelize, DataTypes) => {
       notEmpty: true,
       min: 0
     }
+    },
+    startBalance: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        min: 0
+      }
+    }
   }
-  }, {
+  , {
     sequelize,
     modelName: 'user',
   });
