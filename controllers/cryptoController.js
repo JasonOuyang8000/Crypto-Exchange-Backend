@@ -50,7 +50,7 @@ cryptoController.getOneCryptoById = async (req, res, next) => {
 
 
         const { coin } = response.data.data;
-        console.log(coin);
+   
         res.json({
             message: 'ok',
             coin

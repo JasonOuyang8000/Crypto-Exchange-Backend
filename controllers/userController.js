@@ -116,23 +116,24 @@ userController.userTransaction = async (req, res, next) => {
             }
         });
 
-        const [userCrypto] = await userFind.getUserCryptos({
-            where: {
-                userId: userFind.id,
-                cryptoId: cryptoFind.id
-            }
-        });
        
         // console.log(cryptoFind, userFind);
         
         if ( type === 'buy') {
-            if (userFind.balance < dollarAmount)  return res.status(401).json({ error: 'Not Enough Money'});
+            if (parseFloat(userFind.balance) < parseFloat(dollarAmount))  return res.status(401).json({ error: 'Not Enough Money'});
 
-            await userFind.addCrypto(cryptoFind);
+           await userFind.addCrypto(cryptoFind);
             
+            
+            const [userCrypto] = await userFind.getUserCryptos({
+                    where: {
+                        userId: userFind.id,
+                        cryptoId: cryptoFind.id
+                    }
+            }); 
 
            userFind.decrement('balance', {by: dollarAmount});
-           await userFind.save();
+         
 
            if (userCrypto.amount) {
               await userCrypto.increment('amount', {by: coinAmount});
@@ -151,7 +152,15 @@ userController.userTransaction = async (req, res, next) => {
         }
 
         else if (type === 'sell') {
-            if (userCrypto.amount < coinAmount) return  res.status(401).json({ error: `You can't sell more than what you have. You have ${userCrypto.amount} ${cryptoFind.symbol}.`});
+                      
+            const [userCrypto] = await userFind.getUserCryptos({
+                where: {
+                    userId: userFind.id,
+                    cryptoId: cryptoFind.id
+                }
+            }); 
+
+            if (parseFloat(userCrypto.amount) < parseFloat(coinAmount)) return  res.status(401).json({ error: `You can't sell more than what you have. You have ${userCrypto.amount} ${cryptoFind.symbol}.`});
 
             await userCrypto.decrement('amount', {by: coinAmount});
 
@@ -184,13 +193,14 @@ userController.getCryptosFromUser = async (req,res,next) => {
             }
         });
 
-        console.log(id);
+       
 
         const userCryptos = await userFind.getCryptos();
 
         res.json({
             message: 'ok',
             balance: userFind.balance,
+            username: userFind.username,
             userCryptos
         });
     
