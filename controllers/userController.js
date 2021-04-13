@@ -104,7 +104,7 @@ userController.userTransaction = async (req, res, next) => {
     try {
         const { usertoken } = req.headers;
         const { id } = jwt.verify(usertoken, process.env.SECRET);
-        const { cryptoId, dollarAmount, coinAmount, type } = req.body;
+        const { type, cryptoId } = req.body;
 
         const userFind = await user.findOne({
             where: id
@@ -120,6 +120,7 @@ userController.userTransaction = async (req, res, next) => {
         // console.log(cryptoFind, userFind);
         
         if ( type === 'buy') {
+            const {dollarAmount, coinAmount } =req.body; 
             if (parseFloat(userFind.balance) < parseFloat(dollarAmount))  return res.status(401).json({ error: 'Not Enough Money'});
 
            await userFind.addCrypto(cryptoFind);
@@ -151,8 +152,13 @@ userController.userTransaction = async (req, res, next) => {
 
         }
 
+        else if ( type ==='buy-all' ) {
+
+        }
+
         else if (type === 'sell') {
-                      
+            const {dollarAmount, coinAmount } =req.body; 
+
             const [userCrypto] = await userFind.getUserCryptos({
                 where: {
                     userId: userFind.id,
@@ -171,6 +177,18 @@ userController.userTransaction = async (req, res, next) => {
                 username: userFind.username,
                 balance: userFind.balance,
                 coinAmount: userCrypto.amount
+            });
+        }
+
+        else if (type === 'sell-all') {
+            const { dollarAmount } =req.body; 
+
+            await userFind.removeCrypto(cryptoFind);
+
+            await userFind.increment('balance', {by: dollarAmount});
+
+            res.json({
+                message: 'ok'
             });
         }
 
