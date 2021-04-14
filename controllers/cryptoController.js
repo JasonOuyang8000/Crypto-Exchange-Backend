@@ -88,7 +88,7 @@ cryptoController.getCryptoHistory = async (req, res) => {
             }
         });
         
-        console.log(formattedHistory);
+    
         
         res.json({
             change,
