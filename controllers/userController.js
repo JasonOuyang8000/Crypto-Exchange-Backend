@@ -78,14 +78,7 @@ userController.login = async (req, res, next) => {
 
 userController.verifyUser = async (req, res, next) => {
     try {
-        const { usertoken } = req.headers;
-        const { id } = jwt.verify(usertoken, process.env.SECRET);
-        
-        const userFind = await user.findOne({
-            where: {
-                id
-            }
-        });
+        const { userFind } = req;
 
         if (userFind !== null) {
             res.json({
@@ -107,13 +100,9 @@ userController.verifyUser = async (req, res, next) => {
 
 userController.userTransaction = async (req, res, next) => {
     try {
-        const { usertoken } = req.headers;
-        const { id } = jwt.verify(usertoken, process.env.SECRET);
-        const { type, cryptoId } = req.body;
+        const { userFind } = req;
 
-        const userFind = await user.findOne({
-            where: id
-        });
+        const { type, cryptoId } = req.body;
 
         const cryptoFind = await crypto.findOne({
             where: {
@@ -203,14 +192,9 @@ userController.userTransaction = async (req, res, next) => {
 };
 
 userController.getCryptosFromUser = async (req,res,next) => {
+
     try {
-        const { usertoken } = req.headers;
-        const { id } = jwt.verify(usertoken, process.env.SECRET);
-        const userFind = await user.findOne({
-            where: {
-                id
-            }
-        });
+        const { userFind } = req;
     
         const userCryptos = await userFind.getCryptos();
        

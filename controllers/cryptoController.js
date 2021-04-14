@@ -64,4 +64,45 @@ cryptoController.getOneCryptoById = async (req, res, next) => {
     }
 };
 
+cryptoController.getCryptoHistory = async (req, res) => {
+
+    try {
+        const { id } = req.params;
+        const { timePeriod } = req.query;
+      
+        const response = await axios.get(`https://api.coinranking.com/v2/coin/${id}/history?timePeriod=${timePeriod}`,{
+            headers: {
+                "x-access-token": process.env.COINRANKING_API
+            }
+        });
+
+        const { change, history } = response.data.data;
+
+        const formattedHistory = history.map(({price, timestamp})=> {
+            const newTimeStamp = timestamp * 1000; 
+            const newDate = new Date(newTimeStamp);
+
+            return {
+                price,
+                timestamp: newDate.toLocaleString()
+            }
+        });
+        
+        console.log(formattedHistory);
+        
+        res.json({
+            change,
+            history,
+            formattedHistory
+        });
+    }
+    catch(error) {
+        res.status(400).json({
+            error: '400 error'
+        });
+    }
+    
+
+};
+
 module.exports = cryptoController;
