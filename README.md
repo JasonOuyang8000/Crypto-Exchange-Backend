@@ -75,4 +75,4 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 * Sell ALL and BUY ALL functionality 
 * Indicate the top 3 cryptos that user is holding.
 * Apply middlewear to for requests to have usertoken.
-* Hashed Data
+* Hashed Password and JWT tokens 
