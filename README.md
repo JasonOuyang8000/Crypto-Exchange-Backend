@@ -76,3 +76,8 @@ https://drive.google.com/file/d/1QGaz5q_t56kmZ5y27n82FFQP0wMhLYXl/view?usp=shari
 * Indicate the top 3 cryptos that user is holding.
 * Apply middlewear to for requests to have usertoken.
 * Hashed Password and JWT tokens 
+
+## References
+https://developers.coinranking.com/api/
+
+
