@@ -13,7 +13,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-     const response = await axios.get('https://api.coinranking.com/v2/coins', {
+     const response = await axios.get('https://api.coinranking.com/v2/coins?limit=100', {
                   headers: {
                       "x-access-token": process.env.COINRANKING_API
                   }

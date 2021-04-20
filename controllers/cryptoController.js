@@ -15,7 +15,7 @@ cryptoController.getCryptos = async (req, res, next) => {
             });
         }
         else {
-            response = await axios.get('https://api.coinranking.com/v2/coins', {
+            response = await axios.get('https://api.coinranking.com/v2/coins?limit=100', {
                 headers: {
                     "x-access-token": process.env.COINRANKING_API
                 }
